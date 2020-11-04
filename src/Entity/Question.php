@@ -25,14 +25,15 @@ class Question
     private $label;
 
     /**
-     * @ORM\OneToOne(targetEntity=Answer::class, mappedBy="question", cascade={"persist", "remove"})
-     */
-    private $answer;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Keywords::class, mappedBy="questions")
      */
     private $keywords;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Answer::class, cascade={"persist", "remove"})
+     * @ORM\Column(nullable=true)
+     */
+    private $answer;
 
     public function __construct()
     {
@@ -52,23 +53,6 @@ class Question
     public function setLabel(string $label): self
     {
         $this->label = $label;
-
-        return $this;
-    }
-
-    public function getAnswer(): ?Answer
-    {
-        return $this->answer;
-    }
-
-    public function setAnswer(Answer $answer): self
-    {
-        $this->answer = $answer;
-
-        // set the owning side of the relation if necessary
-        if ($answer->getQuestion() !== $this) {
-            $answer->setQuestion($this);
-        }
 
         return $this;
     }
@@ -96,6 +80,18 @@ class Question
         if ($this->keywords->removeElement($keyword)) {
             $keyword->removeQuestion($this);
         }
+
+        return $this;
+    }
+
+    public function getAnswer(): ?Answer
+    {
+        return $this->answer;
+    }
+
+    public function setAnswer(?Answer $answer): self
+    {
+        $this->answer = $answer;
 
         return $this;
     }
