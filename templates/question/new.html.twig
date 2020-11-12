@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Question{% endblock %}
+{% block title %}Nouvelle Question{% endblock %}
 
 {% block body %}
-    <h1>Create new Question</h1>
 
-    {{ include('question/_form.html.twig') }}
+    <div class="container">
+        <h1>Créer une nouvelle question et sa réponse</h1>
 
-    <a href="{{ path('question_index') }}">back to list</a>
+        {{ include('question/_form.html.twig') }}
+
+        <a href="{{ path('question_index') }}">back to list</a>
+    </div>
 {% endblock %}
