@@ -26,12 +26,12 @@ class Question
 
     /**
      * @ORM\ManyToMany(targetEntity=Keywords::class, mappedBy="questions")
+     * @ORM\Column(nullable=true)
      */
     private $keywords;
 
     /**
      * @ORM\OneToOne(targetEntity=Answer::class, cascade={"persist", "remove"})
-     * @ORM\Column(nullable=true)
      */
     private $answer;
 
