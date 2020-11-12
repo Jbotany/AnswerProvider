@@ -32,6 +32,7 @@ class Question
 
     /**
      * @ORM\OneToOne(targetEntity=Answer::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $answer;
 
@@ -89,7 +90,7 @@ class Question
         return $this->answer;
     }
 
-    public function setAnswer(?Answer $answer): self
+    public function setAnswer(Answer $answer): self
     {
         $this->answer = $answer;
 

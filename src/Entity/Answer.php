@@ -30,12 +30,6 @@ class Answer
     private $content;
 
     /**
-     * @ORM\OneToOne(targetEntity=Question::class, inversedBy="answer", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $question;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Keywords::class, mappedBy="answers")
      */
     private $keywords;
@@ -70,18 +64,6 @@ class Answer
     public function setContent(string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getQuestion(): ?Question
-    {
-        return $this->question;
-    }
-
-    public function setQuestion(Question $question): self
-    {
-        $this->question = $question;
 
         return $this;
     }
