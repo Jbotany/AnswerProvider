@@ -25,16 +25,15 @@ class Question
     private $label;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Keywords::class, mappedBy="questions")
-     * @ORM\Column(nullable=true)
-     */
-    private $keywords;
-
-    /**
      * @ORM\OneToOne(targetEntity=Answer::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $answer;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Keyword::class, mappedBy="questions")
+     */
+    private $keywords;
 
     public function __construct()
     {
@@ -58,15 +57,27 @@ class Question
         return $this;
     }
 
+    public function getAnswer(): ?Answer
+    {
+        return $this->answer;
+    }
+
+    public function setAnswer(Answer $answer): self
+    {
+        $this->answer = $answer;
+
+        return $this;
+    }
+
     /**
-     * @return Collection|Keywords[]
+     * @return Collection|Keyword[]
      */
     public function getKeywords(): Collection
     {
         return $this->keywords;
     }
 
-    public function addKeyword(Keywords $keyword): self
+    public function addKeyword(Keyword $keyword): self
     {
         if (!$this->keywords->contains($keyword)) {
             $this->keywords[] = $keyword;
@@ -76,23 +87,11 @@ class Question
         return $this;
     }
 
-    public function removeKeyword(Keywords $keyword): self
+    public function removeKeyword(Keyword $keyword): self
     {
         if ($this->keywords->removeElement($keyword)) {
             $keyword->removeQuestion($this);
         }
-
-        return $this;
-    }
-
-    public function getAnswer(): ?Answer
-    {
-        return $this->answer;
-    }
-
-    public function setAnswer(Answer $answer): self
-    {
-        $this->answer = $answer;
 
         return $this;
     }
