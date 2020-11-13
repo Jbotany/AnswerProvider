@@ -3,12 +3,11 @@
 {% block title %}Nouvelle Question{% endblock %}
 
 {% block body %}
-
     <div class="container">
         <h1>Créer une nouvelle question et sa réponse</h1>
 
         {{ include('question/_form.html.twig') }}
 
-        <a href="{{ path('question_index') }}">back to list</a>
+        <a class="mt-3" href="{{ path('question_index') }}">Retour à la liste des questions/réponses</a>
     </div>
 {% endblock %}
