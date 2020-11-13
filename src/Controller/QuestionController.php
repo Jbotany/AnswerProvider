@@ -17,6 +17,9 @@ class QuestionController extends AbstractController
 {
     /**
      * @Route("/", name="question_index", methods={"GET"})
+     * @param \App\Repository\QuestionRepository $questionRepository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(QuestionRepository $questionRepository): Response
     {
@@ -27,6 +30,9 @@ class QuestionController extends AbstractController
 
     /**
      * @Route("/new", name="question_new", methods={"GET","POST"})
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function new(Request $request): Response
     {
